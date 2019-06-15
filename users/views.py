@@ -1,4 +1,5 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.urls import reverse_lazy
 
 from .forms import CustomUserCreationForm
 from .models import CustomUser
@@ -20,5 +21,12 @@ class UserDetail(DetailView):
 class UserCreate(CreateView):
     model = CustomUser
     form_class = CustomUserCreationForm
-    success_url = '/'
+    success_url = reverse_lazy("users")
     template_name = "create_user.html"
+
+
+class DeleteUser(DeleteView):
+    model = CustomUser
+    success_url = reverse_lazy("users")
+    template_name = "delete_user.html"
+    slug_field = "username"
