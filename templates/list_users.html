@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a class="button is-success">+</a><br><br>
+<a href="{% url 'new' %}" class="button is-success">+</a><br><br>
 <table class="table is-striped is-hoverable">
   <thead>
     <tr>
@@ -12,14 +12,14 @@
       <th></th>
     </tr>
   </thead>
+  {% for user in users %}
   <tbody>
-    {% for user in users %}
     <td>{{ user.pk }}</td>
     <td><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></td>
     <td>{{ user.email }}</td>
     <td>{{ user.bio|truncatechars:30 }}</td>
     <td><a class="button is-warning is-small">Editar</a> <a class="button is-danger is-small">Borrar</a></td>
-    {% endfor %}
   </tbody>
+  {% endfor %}
 </table>
 {% endblock content %}

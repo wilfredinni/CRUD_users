@@ -1,5 +1,6 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
+from .forms import CustomUserCreationForm
 from .models import CustomUser
 
 
@@ -14,3 +15,10 @@ class UserDetail(DetailView):
     template_name = "user.html"
     context_object_name = "user"
     slug_field = "username"
+
+
+class UserCreate(CreateView):
+    model = CustomUser
+    form_class = CustomUserCreationForm
+    success_url = '/'
+    template_name = "create_user.html"
