@@ -1,3 +1,19 @@
-{{ user.username }}
-{{ user.email }}
-{{ user.bio }}
+{% extends 'base.html' %}
+{% load gravatar_tag %}
+
+{% block content %}
+
+<figure class="image is-128x128 has-image-centered">
+  <img class="is-rounded" src="{{ user|gravatar }}">
+</figure>
+
+<div class="content">
+  <h1 class="title has-text-centered">{{ user.username }}</h1>
+  <p class="subtitle has-text-centered">{{ user.email }}</p>
+  <hr>
+  <p>{{ user.bio }} (<a href="/">Editar</a>)</p>
+</div>
+
+<a class="is-pulled-right" href="/">Volver</a>
+
+{% endblock content %}
