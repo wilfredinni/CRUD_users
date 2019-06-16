@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load gravatar_tag %}
 
+{% block title %}
+  <title>{{ user.username }} - Users CRUD</title>
+{% endblock title %}
+
 {% block content %}
 
 <figure class="image is-128x128 has-image-centered">
@@ -11,7 +15,7 @@
   <h1 class="title has-text-centered">{{ user.username }}</h1>
   <p class="subtitle has-text-centered">{{ user.email }}</p>
   <hr>
-  <p>{{ user.bio }} (<a href="/">Editar</a>)</p>
+  <p>{{ user.bio }} (<a href="{% url 'update' user.username %}">Editar</a>)</p>
 </div>
 
 <a class="is-pulled-right" href="{% url 'users' %}">Volver</a>

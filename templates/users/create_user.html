@@ -1,22 +1,37 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
+{% block title %}
+
+{% if is_update %}
+  <title>Modificar Usuario - Users CRUD</title>
+{% else %}
+  <title>Crear Usuario - Users CRUD</title>
+{% endif %}
+
+{% endblock title %}
+
+
 {% block content %}
 
 <div class="content">
 
   <div class="hero">
     <div class="container hero-body sing-in-resp">
-      <h1 class="title has-text-centered">Crear Nuevo Usuario</h1>
+
+      {% if is_update %}
+        <h1 class="title has-text-centered">Modificar Usuario</h1>
+      {% else %}
+        <h1 class="title has-text-centered">Crear Nuevo Usuario</h1>
+      {% endif %}
 
       <form method="POST">
         {% csrf_token %}
 
+        <!-- username -->
         <div class="field">
           <label class="label">{{ form.username.label }}</label>
-          <p class="control">
-            {{ form.username|add_class:"input" }}
-          </p>
+          <p class="control">{{ form.username|add_class:"input" }}</p>
           {% if form.username.errors %}
             {% for error in form.username.errors %}
             <div class="invalid-feedback">
@@ -24,26 +39,31 @@
             </div>
             {% endfor %}
           {% endif %}
-
         </div>
+
+        <!-- email -->
         <div class="field">
           <label class="label">{{ form.email.label }}</label>
-          <p class="control">
-            {{ form.email|add_class:"input" }}
-          </p>
+          <p class="control">{{ form.email|add_class:"input" }}</p>
         </div>
+
+        <!-- bio -->
         <div class="field">
           <label class="label">{{ form.bio.label }}</label>
           <p class="control textfield-height">
             {{ form.bio|add_class:"textarea"|attr:"rows:3" }}
           </p>
         </div>
+
+        <!-- pass1 -->
         <div class="field">
           <label class="label">{{ form.password1.label }}</label>
           <p class="control">
             {{ form.password1|add_class:"input"|attr:"type:password" }}
           </p>
         </div>
+
+        <!-- pass2 -->
         <div class="field">
           {{ form.password2.label }}
           <p class="control">
@@ -59,7 +79,13 @@
         </div>
         <p class="help">{{ form.password.errors }}</p>
 
-        <button class="button is-fullwidth is-primary" type="submit">Crear Usuario</button>
+        <!-- buttons -->
+        {% if is_update %}
+          <button class="button is-fullwidth is-primary" type="submit">Actualizar</button>
+        {% else %}
+          <button class="button is-fullwidth is-primary" type="submit">Crear Usuario</button>
+        {% endif %}
+
       </form>
     </div>
   </div>

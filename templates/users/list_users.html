@@ -19,7 +19,8 @@
     <td><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></td>
     <td>{{ user.email }}</td>
     <td>{{ user.bio|truncatechars:30 }}</td>
-    <td><a class="button is-warning is-small">Editar</a> <a href="{% url 'delete' user.username %}" class="button is-danger is-small">Borrar</a></td>
+    <td><a href="{% url 'update' user.username %}" class="button is-warning is-small">Editar</a>
+      <a href="{% url 'delete' user.username %}" class="button is-danger is-small">Borrar</a></td>
   </tbody>
   {% endfor %}
 </table>
