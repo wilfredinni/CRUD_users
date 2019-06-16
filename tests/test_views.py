@@ -57,6 +57,11 @@ class TestAuthenticatedViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "users/user.html")
 
+    def test_wrong_user_detail(self):
+        url = reverse("profile", args=["wrong_user"])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
     def test_create_user(self):
         url = reverse("new")
         response = self.client.get(url)
@@ -69,8 +74,24 @@ class TestAuthenticatedViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "users/create_user.html")
 
+    def test_wrong_update_user(self):
+        url = reverse("update", args=["wrong_user"])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_user(self):
         url = reverse("delete", args=["test_user"])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "users/delete_user.html")
+
+    def test_delete_wrong_user(self):
+        url = reverse("delete", args=["wrong_user"])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_login(self):
+        url = reverse("login")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/login.html")

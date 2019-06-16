@@ -14,10 +14,18 @@ from .models import CustomUser
 
 
 class UserList(LoginRequiredMixin, ListView):
-    model = CustomUser
     template_name = "users/list_users.html"
     context_object_name = "users"
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = CustomUser.objects.all()
+        # los usuarios que no son staff solo pueden ver
+        # y editar sus propios perfiles
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(username=self.request.user.username)
+
+        return queryset
 
 
 class UserDetail(LoginRequiredMixin, DetailView):

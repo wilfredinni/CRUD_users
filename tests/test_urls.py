@@ -6,7 +6,7 @@ from users.models import CustomUser
 
 
 class UsersUrlsTest(TestCase):
-    """comprobar que las vistas rendidas por las vistas que corresponden"""
+    """comprobar que las vistas son rendidas por las clases que corresponden"""
     def setUp(self):
         self.client = Client()
         CustomUser.objects.create_user("test_user")
