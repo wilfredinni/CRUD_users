@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="hero">
+  <div class="hero-body">
+
+    <div class="column is-6 is-offset-3 is-mobile box">
+      <h1 class="title has-text-centered">Ingresar</h1>
+
+      <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <!-- username -->
+        <div class="field">
+          <label class="label">{{ form.username.label }}</label>
+          <p class="control">{{ form.username|add_class:"input" }}</p>
+          {% if form.username.errors %}
+            {% for error in form.username.errors %}
+            <div class="invalid-feedback">
+              <p class="help has-text-danger">{{ error }}</p>
+            </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <!-- password -->
+        <div class="field">
+          <label class="label">{{ form.password.label }}</label>
+          <p class="control">{{ form.password|add_class:"input" }}</p>
+          {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <p{% if forloop.last %} class="help has-text-danger" {% endif %}>{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+          <br>
+          <button class="button is-fullwidth is-primary" type="submit">Sign In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

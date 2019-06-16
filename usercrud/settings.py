@@ -120,3 +120,6 @@ STATICFILES_DIRS = BASE_DIR, "static"
 
 # custom user model
 AUTH_USER_MODEL = "users.CustomUser"
+
+LOGIN_REDIRECT_URL = 'users'
+LOGOUT_REDIRECT_URL = 'users'

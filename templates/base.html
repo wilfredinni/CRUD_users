@@ -9,11 +9,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
   {% block title %}<title>Users CRUD</title>{% endblock title %}
 </head>
 
 <body>
+
+  {% include 'navbar.html' %}
+
   <div class="container section">
 
     <div class="columns">

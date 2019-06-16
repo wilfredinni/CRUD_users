@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+{% load gravatar_tag %}
 
 {% block content %}
 
-<a href="{% url 'new' %}" class="button is-success">+</a><br><br>
-<table class="table is-striped is-hoverable">
+<table class="table is-striped is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th>Id</th>
@@ -24,5 +24,9 @@
   </tbody>
   {% endfor %}
 </table>
+
+{% if is_paginated %}
+  {% include 'pagination.html' %}
+{% endif %}
 
 {% endblock content %}
